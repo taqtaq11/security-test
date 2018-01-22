@@ -1,6 +1,6 @@
 package com.unc.securitytest.controllers;
 
-import com.unc.securitytest.services.security.DatabaseUserDetailsService;
+import com.unc.securitytest.services.security.UserSessionService;
 import com.unc.securitytest.services.security.SessionUser;
 import com.unc.securitytest.services.security.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
 
     private final TokenAuthenticationService authenticationService;
-    private final DatabaseUserDetailsService databaseUserDetailsService;
+    private final UserSessionService userSessionService;
 
     @Autowired
     public LoginController(TokenAuthenticationService authenticationService,
-                           DatabaseUserDetailsService databaseUserDetailsService) {
+                           UserSessionService userSessionService) {
         this.authenticationService = authenticationService;
-        this.databaseUserDetailsService = databaseUserDetailsService;
+        this.userSessionService = userSessionService;
     }
 
 
@@ -33,7 +33,7 @@ public class LoginController {
                         @RequestParam String pass,
                         HttpServletResponse response) {
 //        SessionUser user = (SessionUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SessionUser sessionUser = databaseUserDetailsService.getUser(username, pass);
+        SessionUser sessionUser = userSessionService.getUser(username, pass);
 
         if (sessionUser != null) {
             authenticationService.addAuthentication(response, sessionUser);

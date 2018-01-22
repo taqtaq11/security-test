@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
-public class DatabaseUserDetailsService {
+public class UserSessionService {
     public SessionUser getUser(String username, String pass) {
         //load actual pass from DB
         String actualPass = "qwerty123";

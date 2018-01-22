@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class StatelessAuthenticationFilter extends GenericFilterBean {
+public class JWTAuthenticationFilter extends GenericFilterBean {
 
     private final TokenAuthenticationService tokenAuthenticationService;
 
-    public StatelessAuthenticationFilter(TokenAuthenticationService tokenAuthenticationService) {
+    public JWTAuthenticationFilter(TokenAuthenticationService tokenAuthenticationService) {
         this.tokenAuthenticationService = tokenAuthenticationService;
     }
 

@@ -31,7 +31,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .addFilterBefore(
-                        new StatelessAuthenticationFilter(authenticationService),
+                        new JWTAuthenticationFilter(authenticationService),
                         UsernamePasswordAuthenticationFilter.class
                 );
     }
