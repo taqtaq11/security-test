@@ -1,9 +1,11 @@
 package com.unc.securitytest.services.security;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserSessionService {
@@ -15,10 +17,18 @@ public class UserSessionService {
             return null;
         }
 
+        List<GrantedAuthority> roles;
+
+        if (username.equals("jigurda")) {
+            roles = Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else {
+            roles = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
         return new SessionUser(
                 "123",
                 username,
                 pass,
-                Collections.singletonList(new SimpleGrantedAuthority("user")));
+                roles);
     }
 }
